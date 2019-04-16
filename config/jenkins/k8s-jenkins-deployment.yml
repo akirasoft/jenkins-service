@@ -26,7 +26,7 @@ metadata:
   name: jenkins
 spec:
   hosts:
-  - "jenkins.keptn.GATEWAY_PLACEHOLDER.xip.io"
+  - "jenkins.keptn.istio.pks.cf.dev.dynatracelabs.com"
   - "jenkins.keptn.svc.cluster.local"
   gateways:
   - jenkins-gateway
