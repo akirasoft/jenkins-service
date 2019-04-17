@@ -50,8 +50,9 @@ curl -X POST http://$JENKINS_URL/credentials/store/system/domain/_/createCredent
     "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
   }
 }' \
---retry 8 \
---retry-connrefused
+--retry 8 
+# not available in ubuntu <18.04
+#--retry-connrefused
 
 
 curl -X POST http://$JENKINS_URL/credentials/store/system/domain/_/createCredentials \
@@ -66,8 +67,9 @@ curl -X POST http://$JENKINS_URL/credentials/store/system/domain/_/createCredent
     "$class": "de.tsystems.mms.apm.performancesignature.dynatracesaas.model.DynatraceApiTokenImpl"
   }
 }' \
---retry 8 \
---retry-connrefused
+--retry 8 
+# not available in ubuntu <18.04
+#--retry-connrefused
 
 echo "--------------------------"
 echo "End setup credentials in Jenkins "
