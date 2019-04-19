@@ -11,7 +11,9 @@ DT_TENANT_URL=$8
 # Deploy Jenkins - see keptn/install/setupInfrastructure.sh:
 rm -f config/jenkins/gen/k8s-jenkins-deployment.yml
 
-export GATEWAY=$(kubectl describe svc istio-ingressgateway -n istio-system | grep "LoadBalancer Ingress:" | sed 's~LoadBalancer Ingress:[ \t]*~~')
+#export GATEWAY=$(kubectl describe svc istio-ingressgateway -n istio-system | grep "LoadBalancer Ingress:" | sed 's~LoadBalancer Ingress:[ \t]*~~')
+# use dns entry for gateway
+export GATEWAY="istio.pks.cf.dev.dynatracelabs.com"
 
 cat config/jenkins/k8s-jenkins-deployment.yml | \
   sed 's~GATEWAY_PLACEHOLDER~'"$GATEWAY"'~' | \
@@ -35,7 +37,8 @@ echo "Setup Credentials in Jenkins "
 echo "--------------------------"
 
 # Export Jenkins route in a variable
-export JENKINS_URL="jenkins.keptn.$GATEWAY.xip.io"
+# use dns entry for jenkins
+export JENKINS_URL="jenkins.keptn.$GATEWAY"
 
 curl -X POST http://$JENKINS_URL/credentials/store/system/domain/_/createCredentials --user $JENKINS_USER:$JENKINS_PASSWORD \
 --data-urlencode 'json={
